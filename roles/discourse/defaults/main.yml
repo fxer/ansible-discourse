@@ -1,0 +1,17 @@
+# What version of Discourse to install (the git tag)
+discourse_version: 'v1.9.3'
+
+discourse_required_packages:
+  - gcc
+  - gcc-c++
+  - zlib-devel
+  - ruby24
+  - ruby24-devel
+  - rubygem24-rake
+  - postgresql96
+  - postgresql96-server
+  - postgresql96-devel
+  - redis
+  - git
+
+discourse_install_path: '/var/www/discourse'

@@ -1,0 +1,21 @@
+---
+- name: Install required packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ discourse_required_packages }}"
+  notify:
+    - start redis
+    - start postgres
+
+- name: Create Discourse install path
+  file:
+    path: "{{ discourse_install_path }}"
+    state: directory
+    mode: "0755"
+
+- name: Install Discourse
+  git:
+    repo: 'https://github.com/discourse/discourse.git'
+    dest: "{{ discourse_install_path }}"
+    version: "{{ discourse_version }}"

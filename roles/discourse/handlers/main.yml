@@ -1,0 +1,12 @@
+---
+- name: start redis
+  service:
+    name: redis
+    state: started
+    enabled: yes
+
+- name: start postgres
+  service:
+    name: postgresql96
+    state: started
+    enabled: yes

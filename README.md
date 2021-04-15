@@ -2,7 +2,8 @@
 
 
 ## Local config
-* `brew install ansible`
+* macOS: `brew install ansible`
+* CentOS/Amazon Linux: `yum install ansible`
 
 ## Examples
 See what changes will be made:

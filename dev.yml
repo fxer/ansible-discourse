@@ -1,7 +1,6 @@
 ---
 - name: 'Dev environment'
   hosts: discourse-server
-  become: yes
 
   roles:
         - discourse

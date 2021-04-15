@@ -1,21 +1,45 @@
 ---
+- name: Install EPEL repo (for Ruby24 and other extended packages)
+  package:
+    name: epel-release
+    state: present
+  become: yes
+
 - name: Install required packages
   package:
     name: "{{ item }}"
     state: present
+    update_cache: yes
   with_items: "{{ discourse_required_packages }}"
+  become: yes
   notify:
     - start redis
     - start postgres
+
+- name: Create Discourse user
+  user:
+    name: "{{ discourse_user }}"
+    comment: "Discourse User"
+    shell: '/usr/sbin/nologin'
+    system: yes
+    createhome: no
 
 - name: Create Discourse install path
   file:
     path: "{{ discourse_install_path }}"
     state: directory
+    owner: "{{ discourse_user }}"
+    group: "{{ discourse_user }}"
     mode: "0755"
+  become: yes
 
 - name: Install Discourse
   git:
     repo: 'https://github.com/discourse/discourse.git'
     dest: "{{ discourse_install_path }}"
     version: "{{ discourse_version }}"
+
+- name: Run bundler
+  command: /usr/local/bin/bundle install
+  args:
+    chdir: "{{ discourse_install_path }}"

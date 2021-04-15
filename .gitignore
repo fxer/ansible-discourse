@@ -1,3 +1,5 @@
+.vagrant/
+
 vault.pass
 
 required-roles/

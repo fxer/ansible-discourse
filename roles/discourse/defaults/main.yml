@@ -15,3 +15,5 @@ discourse_required_packages:
   - git
 
 discourse_install_path: '/var/www/discourse'
+
+discourse_user: 'discourse'
